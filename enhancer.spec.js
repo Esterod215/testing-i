@@ -34,7 +34,30 @@ describe('fail', ()=>{
         let item = {name:'',type:'',durability:18,enhancement:14};
         const actual = fail(item);
         expect(actual.durability).toBe(13)
+        //tests if durability will not decrease below 0
+        let newItem = {name:'',type:'',durability:3,enhancement:14};
+        const newTest = fail(newItem);
+        expect(newTest.durability).toBe(0);
+        expect(fail(newItem.durability = 0)).toBe(0);
+
+    });
+
+    it('should subtract 10 from durability if enhancement is greater than or equal to 15',()=>{
+        let item = {name:'',type:'',durability:18,enhancement:15};
+        const actual = fail(item);
+        expect(actual.durability).toBe(8)
+        //tests that durability will not decrease below 0
+        let item2 = {name:'',type:'',durability:7,enhancement:15};
+        expect(fail(item2).durability).toBe(0);
     })
+
+    it('should lower enhancemnet by 1 if enhancement is greater than 16',()=>{
+        let item = {name:'',type:'',durability:18,enhancement:16};
+        const actual = fail(item);
+        expect(actual.enhancement).toBe(16)
+        expect(actual.durability).toBe(8);
+    })
+
 })
 
 });

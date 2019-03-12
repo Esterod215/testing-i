@@ -18,6 +18,10 @@ function success(item={}){
     }
 }
 function fail (item = {}){
+    if(item.enhancement > 16){
+        item.enhancement= item.enhancement -1;
+    }
+    
     if(item.enhancement < 15){
         if(item.durability <= 5){
             item.durability = 0;
@@ -36,9 +40,7 @@ function fail (item = {}){
         
     }
 
-    if(item.enhancement > 16){
-        item.enhancemnet= item.enhancement -1;
-    }
+    
     return item;
     
 }
